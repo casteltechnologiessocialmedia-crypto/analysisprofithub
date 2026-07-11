@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { Maximize2, RefreshCw, AlertCircle } from "lucide-react"
+import { Maximize2, RefreshCw, AlertCircle, LogIn } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface DTraderTabProps {
@@ -12,8 +12,22 @@ export function DTraderTab({ theme = "dark" }: DTraderTabProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [iframeKey, setIframeKey] = useState(0)
   const [error, setError] = useState<string | null>(null)
+  const [dtraderUrl, setDtraderUrl] = useState("https://deriv-dtrader.vercel.app")
 
   useEffect(() => {
+    // Get auth token from sessionStorage (set by Deriv auth)
+    const token = sessionStorage.getItem("deriv_token")
+    
+    if (token) {
+      // Pass token to DTrader via URL parameter
+      const url = new URL("https://deriv-dtrader.vercel.app")
+      url.searchParams.append("token", token)
+      setDtraderUrl(url.toString())
+      console.log("[v0] DTrader token available, auto-login enabled")
+    } else {
+      console.log("[v0] No DTrader token found, manual login required")
+    }
+
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 2000)
@@ -27,7 +41,12 @@ export function DTraderTab({ theme = "dark" }: DTraderTabProps) {
   }
 
   const handleOpenInNewTab = () => {
-    window.open("https://deriv-dtrader.vercel.app", "_blank")
+    window.open(dtraderUrl, "_blank")
+  }
+
+  const handleLoginDirect = () => {
+    // Open Deriv login in new tab, then return to this tab
+    window.open("https://deriv-dtrader.vercel.app/login", "_blank", "width=500,height=700")
   }
 
   return (
@@ -42,6 +61,15 @@ export function DTraderTab({ theme = "dark" }: DTraderTabProps) {
         </div>
 
         <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleLoginDirect}
+            className="h-9 gap-2"
+          >
+            <LogIn className="h-4 w-4" />
+            Login to Trade
+          </Button>
           <Button
             size="sm"
             variant="outline"
@@ -80,17 +108,22 @@ export function DTraderTab({ theme = "dark" }: DTraderTabProps) {
             <div className="flex flex-col items-center gap-4 max-w-md px-6">
               <AlertCircle className="h-8 w-8 text-red-500" />
               <p className={`text-sm text-center ${theme === "dark" ? "text-slate-300" : "text-slate-700"}`}>{error}</p>
-              <Button size="sm" onClick={handleRefresh} className="bg-blue-600 hover:bg-blue-700">
-                Retry
-              </Button>
+              <div className="flex gap-2">
+                <Button size="sm" onClick={handleRefresh} className="bg-blue-600 hover:bg-blue-700">
+                  Retry
+                </Button>
+                <Button size="sm" onClick={handleLoginDirect} className="bg-green-600 hover:bg-green-700">
+                  Login to Trade
+                </Button>
+              </div>
             </div>
           </div>
         )}
 
-        {/* iframe */}
+        {/* iframe with relaxed sandbox for cookie sharing */}
         <iframe
           key={iframeKey}
-          src="https://deriv-dtrader.vercel.app"
+          src={dtraderUrl}
           title="Deriv DTrader"
           className="w-full h-full border-0"
           allow="clipboard-read; clipboard-write; camera; microphone; payment"
@@ -98,12 +131,14 @@ export function DTraderTab({ theme = "dark" }: DTraderTabProps) {
             allowSameOrigin: true,
             allowScripts: true,
             allowPopups: true,
+            allowPopupsToEscapeSandbox: true,
             allowForms: true,
             allowStorageAccessByUserActivation: true,
+            allowTopNavigation: true,
           }}
           onLoad={() => setIsLoading(false)}
           onError={() => {
-            setError("Failed to load DTrader. Please check your connection and try again.")
+            setError("Failed to load DTrader. Click Login to start trading.")
             setIsLoading(false)
           }}
         />
@@ -112,7 +147,7 @@ export function DTraderTab({ theme = "dark" }: DTraderTabProps) {
       {/* Footer Info */}
       <div className={`px-4 py-3 border-t ${theme === "dark" ? "border-slate-800 bg-slate-900/50 text-slate-400" : "border-slate-200 bg-slate-100 text-slate-600"}`}>
         <p className="text-xs">
-          Connected to Deriv DTrader • Trading cookies preserved • Login session shared with platform
+          Click "Login to Trade" to authenticate with Deriv • Cookies preserved across sessions
         </p>
       </div>
     </div>
