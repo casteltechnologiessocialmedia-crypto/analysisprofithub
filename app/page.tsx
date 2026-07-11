@@ -724,8 +724,10 @@ export default function DerivAnalysisApp() {
                   <DiffersTab analysis={analysis} signals={signals} recentDigits={recentDigits} theme={theme} symbol={symbol} currentPrice={currentPrice} currentDigit={currentDigit} tickCount={tickCount} maxTicks={maxTicks} onMaxTicksChange={changeMaxTicks} />
                 )}
               </TabsContent>
+            </>
+          )}
+        </Tabs>
 
-              
       {!siteConfig?.footerHidden && (
         <footer
           className={`mt-4 py-3 transition-all duration-300 border-t ${theme === "dark"
