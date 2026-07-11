@@ -23,6 +23,7 @@ import {
 import { ProfitPlusTradingLogic, TradeSignal, TradeResult } from '@/lib/profit-plus-trading-logic'
 import { DerivTradingService } from '@/lib/deriv-trading-service'
 import { DerivInfoPanel } from '@/components/deriv-info-panel'
+import { SUPPORTED_TIMEFRAMES } from '@/lib/market-timeframes'
 import { ExternalLink } from 'lucide-react'
 
 interface TradeStats {
@@ -264,7 +265,7 @@ export function ProfitPlusRebuild() {
           {/* Market Selection */}
           <Card className="bg-slate-900/50 border-slate-800 p-4">
             <div className="flex gap-2 flex-wrap">
-              {['5s', '10s', '30s', '1m', '5m'].map(market => (
+              {SUPPORTED_TIMEFRAMES.map(market => (
                 <button
                   key={market}
                   onClick={() => setSelectedMarket(market)}
