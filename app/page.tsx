@@ -728,7 +728,7 @@ export default function DerivAnalysisApp() {
           )}
         </Tabs>
 
-      {!siteConfig?.footerHidden && (
+{!siteConfig?.footerHidden && (
         <footer
           className={`mt-4 py-3 transition-all duration-300 border-t ${theme === "dark"
             ? "bg-[#0a0a0a] border-white/8"
