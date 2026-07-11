@@ -36,6 +36,7 @@ import { AutomatedTab } from "@/components/tabs/automated-tab"
 import { SmartAuto24Tab } from "@/components/tabs/smartauto24-tab"
 import { ProfitPlusTabV2 } from "@/components/tabs/profit-plus-tab-v2"
 import { ProfitPlusRebuild } from "@/components/tabs/profit-plus-rebuild"
+import { DTraderTab } from "@/components/tabs/dtrader-tab"
 import { AdvancedSignalsTab } from "@/components/advanced-signals-tab"
 import { useGlobalTradingContext } from "@/hooks/use-global-trading-context"
 import { verifier } from "@/lib/system-verifier"
@@ -274,7 +275,7 @@ export default function DerivAnalysisApp() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => window.open('https://deriv-dtrader.vercel.app', '_blank')}
+                      onClick={() => setActiveTab('dtrader')}
                       className={`h-8 px-3 text-[10px] rounded-lg font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-0`}
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
@@ -363,6 +364,7 @@ export default function DerivAnalysisApp() {
                           "smart-analysis",
                           "smartauto24",
                           "profit-plus",
+                          "dtrader",
                           "money-maker",
                           "autobot",
                           "automated",
@@ -384,6 +386,7 @@ export default function DerivAnalysisApp() {
                             "smart-analysis": "Smart Analysis",
                             "smartauto24": "SmartAuto24",
                             "profit-plus": "ProfitPlus",
+                            "dtrader": "DTrader",
                             "money-maker": "Money Maker",
                             "autobot": "Auto Bot",
                             "automated": "Automated",
@@ -405,6 +408,7 @@ export default function DerivAnalysisApp() {
                             "smart-analysis": LineChart,
                             "smartauto24": Sparkles,
                             "profit-plus": TrendingUp,
+                            "dtrader": Activity,
                             "money-maker": TrendingUp,
                             "autobot": Cpu,
                             "automated": Terminal,
@@ -821,6 +825,10 @@ export default function DerivAnalysisApp() {
 
               <TabsContent value="profit-plus" className="mt-0">
                 <ProfitPlusRebuild />
+              </TabsContent>
+
+              <TabsContent value="dtrader" className="mt-0">
+                <DTraderTab theme={theme} />
               </TabsContent>
 
               <TabsContent value="money-maker" className="mt-0">
