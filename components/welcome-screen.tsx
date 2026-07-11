@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { TrendingUp, ArrowRight, Zap, Shield, BarChart2 } from "lucide-react";
+import { ArrowRight, Zap, Shield, BarChart2 } from "lucide-react";
+import Image from "next/image";
 
 import ActiveSymbols from "@/components/ActiveSymbols";
 
@@ -85,7 +86,14 @@ export default function WelcomeScreen({ onContinue }: WelcomeScreenProps) {
             transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
           />
           <div className="aph-logo-inner">
-            <TrendingUp size={28} strokeWidth={1.8} />
+            <Image
+              src="/logo-profithub.png"
+              alt="Profithub"
+              width={40}
+              height={40}
+              style={{ objectFit: "contain" }}
+              priority
+            />
           </div>
         </motion.div>
 
@@ -95,13 +103,13 @@ export default function WelcomeScreen({ onContinue }: WelcomeScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.5 }}
         >
-          <p className="aph-eyebrow">ANALYSIS PROFIT HUB</p>
+          <p className="aph-eyebrow">PROFITHUB AI TRADING</p>
           <h1 className="aph-headline">
-            Trade Smarter,<br />
-            <span className="aph-headline-accent">Not Harder.</span>
+            Smart Trading,<br />
+            <span className="aph-headline-accent">Maximum Profit.</span>
           </h1>
           <p className="aph-sub">
-            AI-powered analytics, live market signals, and automated execution — all in one place.
+            Multi-strategy AI scanning, real-time market analysis, and smart auto-trading — all powered by Deriv.
           </p>
         </motion.div>
 

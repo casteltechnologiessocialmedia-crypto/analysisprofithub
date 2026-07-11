@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from 'next/link'
+import Image from 'next/image'
 import { DigitDistribution } from "@/components/digit-distribution"
 import { SignalsTab } from "@/components/tabs/signals-tab"
 import { ProSignalsTab } from "@/components/tabs/pro-signals-tab"
@@ -221,17 +222,24 @@ export default function DerivAnalysisApp() {
             <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
               <div className="flex flex-nowrap items-center h-16 sm:h-20 gap-4 sm:gap-6 w-full justify-between overflow-hidden">
 
-                {/* Brand Name Only - Clean Modern */}
+                {/* Brand Name - Profithub Logo */}
                 <div className="flex items-center shrink-0 gap-2.5 sm:min-w-[220px]">
-                  <div className={`p-2 rounded-xl flex items-center justify-center shrink-0 ${theme === "dark" ? "bg-indigo-500/10 text-indigo-400 animate-pulse" : "bg-indigo-50 text-indigo-600"}`}>
-                    <Activity className="h-4.5 w-4.5" />
+                  <div className={`p-2 rounded-xl flex items-center justify-center shrink-0 ${theme === "dark" ? "bg-green-500/10" : "bg-green-50"}`}>
+                    <Image
+                      src="/logo-profithub.png"
+                      alt="Profithub"
+                      width={24}
+                      height={24}
+                      style={{ objectFit: "contain" }}
+                      priority
+                    />
                   </div>
                   <div className="flex flex-col leading-none">
-                    <h1 className={`text-base sm:text-lg font-black tracking-tight uppercase bg-gradient-to-r from-indigo-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent`}>
-                      analysistoolpro
+                    <h1 className={`text-base sm:text-lg font-black tracking-tight uppercase bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent`}>
+                      Profithub
                     </h1>
-                    <h2 className={`text-[8px] sm:text-[9px] font-black tracking-[0.25em] opacity-60 uppercase ${theme === "dark" ? "text-indigo-300" : "text-indigo-600"}`}>
-                      QUANTUM ENGINE
+                    <h2 className={`text-[8px] sm:text-[9px] font-black tracking-[0.25em] opacity-60 uppercase ${theme === "dark" ? "text-green-300" : "text-green-600"}`}>
+                      AI TRADING
                     </h2>
                   </div>
                 </div>
