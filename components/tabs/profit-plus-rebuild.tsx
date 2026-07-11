@@ -22,10 +22,8 @@ import {
 } from 'lucide-react'
 import { ProfitPlusTradingLogic, TradeSignal, TradeResult } from '@/lib/profit-plus-trading-logic'
 import { DerivTradingService } from '@/lib/deriv-trading-service'
-import { TradingScannerEngine, ScanResult } from '@/lib/trading-scanner-engine'
-import { SmartTradeLoop, TradeExecution, LoopState } from '@/lib/smart-trade-loop'
-import { TradingScannerUI } from '@/components/trading-scanner-ui'
-import { AutoTradingModal } from '@/components/auto-trading-modal'
+import { DerivInfoPanel } from '@/components/deriv-info-panel'
+import { ExternalLink } from 'lucide-react'
 
 interface TradeStats {
   strategy: string
@@ -75,7 +73,7 @@ export function ProfitPlusRebuild() {
   const [tradeHistory, setTradeHistory] = useState<StoredTrade[]>([])
   const [stats, setStats] = useState<{ [key: string]: TradeStats }>({})
   const [currentProfit, setCurrentProfit] = useState<number>(0)
-  const [selectedMarket, setSelectedMarket] = useState<string>('1s')
+  const [selectedMarket, setSelectedMarket] = useState<string>('5s')
 
   // API reference
   const tradingServiceRef = useRef<DerivTradingService | null>(null)
@@ -242,11 +240,20 @@ export function ProfitPlusRebuild() {
           <h1 className="text-4xl font-bold text-white">ProfitPlus Pro</h1>
           <p className="text-slate-400 mt-1">Real Trading with Correct Predictions</p>
         </div>
-        <div className="text-right">
-          <div className="text-3xl font-bold text-green-400">${balance.toFixed(2)}</div>
-          <p className={`text-sm ${currentProfit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-            {currentProfit >= 0 ? '+' : ''}{currentProfit.toFixed(2)}
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="text-right">
+            <div className="text-3xl font-bold text-green-400">${balance.toFixed(2)}</div>
+            <p className={`text-sm ${currentProfit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+              {currentProfit >= 0 ? '+' : ''}{currentProfit.toFixed(2)}
+            </p>
+          </div>
+          <Button
+            onClick={() => window.open('https://deriv-dtrader.vercel.app', '_blank')}
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-2"
+          >
+            <ExternalLink size={18} />
+            Open DTrader
+          </Button>
         </div>
       </div>
 
@@ -257,7 +264,7 @@ export function ProfitPlusRebuild() {
           {/* Market Selection */}
           <Card className="bg-slate-900/50 border-slate-800 p-4">
             <div className="flex gap-2 flex-wrap">
-              {['1s', '5s', '10s', '30s', '1m', '5m'].map(market => (
+              {['5s', '10s', '30s', '1m', '5m'].map(market => (
                 <button
                   key={market}
                   onClick={() => setSelectedMarket(market)}
@@ -376,6 +383,8 @@ export function ProfitPlusRebuild() {
 
         {/* Right: Trading Controls & History */}
         <div className="space-y-6">
+          {/* Deriv Info Panel */}
+          <DerivInfoPanel />
           {/* Trading Console */}
           <Card className="bg-slate-900/50 border-slate-800 p-6 space-y-4">
             <h3 className="text-lg font-semibold text-white flex items-center gap-2">
