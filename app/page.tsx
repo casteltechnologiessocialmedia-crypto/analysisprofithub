@@ -5,7 +5,7 @@ import { useDeriv } from "@/hooks/use-deriv"
 import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Moon, Sun, User, AlertTriangle, Menu, TrendingUp, Layers, Eye, Hash, Clock, Activity, LayoutDashboard, Sliders, LineChart, Sparkles, Cpu, Terminal, Radio, Flame, Percent, CheckSquare, XCircle, HelpCircle, BrainCircuit, ArrowUpDown, ExternalLink } from 'lucide-react'
+import { Moon, Sun, User, AlertTriangle, Menu, TrendingUp, Layers, Eye, Hash, Clock, Activity, LayoutDashboard, Sliders, LineChart, Sparkles, Cpu, Terminal, Radio, Flame, Percent, CheckSquare, XCircle, HelpCircle, BrainCircuit, ArrowUpDown } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -77,6 +77,7 @@ export default function DerivAnalysisApp() {
   const [initError, setInitError] = useState<string | null>(null)
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false)
   const [showRiskModal, setShowRiskModal] = useState(false)
+  const [showAIScanner, setShowAIScanner] = useState(false)
 
   const [siteConfig, setSiteConfig] = useState<any>(null)
   const [watchedDigits, setWatchedDigits] = useState<number[]>(() => {
@@ -272,15 +273,6 @@ export default function DerivAnalysisApp() {
                       <AlertTriangle className="h-3.5 w-3.5" />
                       Risk
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setActiveTab('dtrader')}
-                      className={`h-8 px-3 text-[10px] rounded-lg font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-0`}
-                    >
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      DTrader
-                    </Button>
                     <LiveChat />
                     <Button
                       variant="ghost"
@@ -328,7 +320,7 @@ export default function DerivAnalysisApp() {
                         </div>
                         
                         {/* Mobile quick actions at the top of the sidebar */}
-                        <div className="sm:hidden flex items-center justify-around gap-2 p-4 border-b border-white/5 bg-slate-950/25">
+                        <div className="grid grid-cols-3 gap-2 p-4 border-b border-white/5 bg-slate-950/25">
                           <Link href="/account" className="flex-1">
                             <Button variant="outline" size="sm" className="w-full text-[10px] font-bold h-8">
                               <User className="h-3 w-3 mr-1" /> Account
@@ -337,6 +329,10 @@ export default function DerivAnalysisApp() {
                           <Button variant="outline" size="sm" onClick={() => setShowRiskModal(true)} className="flex-1 text-[10px] font-bold h-8">
                             <AlertTriangle className="h-3 w-3 mr-1" /> Risk
                           </Button>
+                          <Button variant="outline" size="sm" onClick={() => setShowAIScanner(true)} className="flex-1 text-[10px] font-bold h-8 bg-indigo-600/20 text-indigo-400 border-indigo-500/30 hover:bg-indigo-600/30">
+                            <Cpu className="h-3 w-3 mr-1" /> AI
+                          </Button>
+                          <LiveChat />
                           <Button variant="outline" size="sm" onClick={toggleTheme} className="flex-1 text-[10px] font-bold h-8">
                             {theme === "dark" ? <Sun className="h-3 w-3 mr-1" /> : <Moon className="h-3.5 w-3.5 mr-1" />} Theme
                           </Button>
@@ -890,6 +886,8 @@ export default function DerivAnalysisApp() {
       <FloatingAIScanner 
         theme={theme} 
         availableSymbols={availableSymbols}
+        isOpen={showAIScanner}
+        onClose={() => setShowAIScanner(false)}
         onScanComplete={(results) => {
           console.log("[v0] AI Scanner results:", results)
         }}

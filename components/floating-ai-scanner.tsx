@@ -14,6 +14,8 @@ interface FloatingAIScannerProps {
   theme?: "light" | "dark"
   availableSymbols?: any[]
   onScanComplete?: (results: ScanResult[]) => void
+  isOpen?: boolean
+  onClose?: () => void
 }
 
 interface ScanResult {
@@ -127,8 +129,18 @@ export function FloatingAIScanner({
   theme = "dark",
   availableSymbols = [],
   onScanComplete,
+  isOpen: externalIsOpen,
+  onClose,
 }: FloatingAIScannerProps) {
-  const [isOpen,        setIsOpen]        = useState(false)
+  const [internalIsOpen,        setInternalIsOpen]        = useState(false)
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen
+  const handleClose = () => {
+    if (onClose) {
+      onClose()
+    } else {
+      setInternalIsOpen(false)
+    }
+  }
   const [isMinimized,   setIsMinimized]   = useState(false)
   const [selected,      setSelected]      = useState<string[]>([])
   const [selStrats,     setSelStrats]     = useState<string[]>(["even_odd", "over_under"])
@@ -190,7 +202,7 @@ export function FloatingAIScanner({
     window.removeEventListener("pointermove", handlePointerMove)
     window.removeEventListener("pointerup", handlePointerUp)
     if (!clickIgnoredRef.current && !isOpen) {
-      setIsOpen(true)
+      setInternalIsOpen(true)
     }
   }
 
@@ -402,7 +414,7 @@ export function FloatingAIScanner({
               <button onClick={() => setIsMinimized(m => !m)} className={`p-1 rounded ${dark ? "hover:bg-white/10" : "hover:bg-black/10"}`}>
                 {isMinimized ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
-              <button onClick={() => { setIsOpen(false); setIsMinimized(false) }} className={`p-1 rounded ${dark ? "hover:bg-white/10" : "hover:bg-black/10"}`}>
+              <button onClick={() => { handleClose(); setIsMinimized(false) }} className={`p-1 rounded ${dark ? "hover:bg-white/10" : "hover:bg-black/10"}`}>
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
