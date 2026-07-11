@@ -22,6 +22,7 @@ import { TradeLog } from "@/components/trade-log"
 import { SmartAuto24Engine } from "@/lib/smartauto24-engine-integration"
 import { useSmartAuto24 } from "@/hooks/use-smartauto24"
 import type { BotSignal } from "@/lib/bot-engines"
+import { submitTradeResult, formatTradeForSubmission } from "@/lib/trade-result-submitter"
 
 interface AnalysisLogEntry {
   timestamp: Date
@@ -741,6 +742,27 @@ export function SmartAuto24Tab({
           `Trade result: ${result.isWin ? "WIN" : "LOSS"} - P/L: $${(result.profit || 0).toFixed(2)}`,
           result.isWin ? "success" : "warning",
         )
+
+        // Submit trade result to API for persistence
+        if (token) {
+          const loginId = token // Using token as loginId for now
+          const strategyName = strat === "Differs" ? `DIFFERS ${differsSelectedDigitRef.current}` : strat
+          const tradeData = formatTradeForSubmission(
+            loginId,
+            strategyName,
+            symbol,
+            result.profit || 0,
+            adjustedStake
+          )
+          submitTradeResult(tradeData, {
+            onSuccess: () => {
+              addAnalysisLog(`Trade posted to database successfully`, "success")
+            },
+            onError: (error) => {
+              addAnalysisLog(`Failed to post trade: ${error.message}`, "warning")
+            }
+          })
+        }
 
         // Reset for next entry
         entryPointMetRef.current = false

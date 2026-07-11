@@ -5,7 +5,7 @@ import { useDeriv } from "@/hooks/use-deriv"
 import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Moon, Sun, User, AlertTriangle, Menu, TrendingUp, Layers, Eye, Hash, Clock, Activity, LayoutDashboard, Sliders, LineChart, Sparkles, Cpu, Terminal, Radio, Flame, Percent, CheckSquare, XCircle, HelpCircle, BrainCircuit, ArrowUpDown } from 'lucide-react'
+import { Moon, Sun, User, AlertTriangle, Menu, TrendingUp, Layers, Eye, Hash, Clock, Activity, LayoutDashboard, Sliders, LineChart, Sparkles, Cpu, Terminal, Radio, Flame, Percent, CheckSquare, XCircle, HelpCircle, BrainCircuit, ArrowUpDown, ExternalLink } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,11 +14,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from 'next/link'
+import Image from 'next/image'
 import { DigitDistribution } from "@/components/digit-distribution"
 import { SignalsTab } from "@/components/tabs/signals-tab"
 import { ProSignalsTab } from "@/components/tabs/pro-signals-tab"
 import { EvenOddTab } from "@/components/tabs/even-odd-tab"
 import { OverUnderTab } from "@/components/tabs/over-under-tab"
+import { MoneyMakerTab as AdvancedOverUnderTab } from "@/components/tabs/advanced-over-under-tab"
 import { MatchesTab } from "@/components/tabs/matches-tab"
 import { DiffersTab } from "@/components/tabs/differs-tab"
 import { StatisticalAnalysis } from "@/components/statistical-analysis"
@@ -32,6 +34,8 @@ import { DerivAuth } from "@/components/deriv-auth"
 import { AutoBotTab } from "@/components/tabs/autobot-tab"
 import { AutomatedTab } from "@/components/tabs/automated-tab"
 import { SmartAuto24Tab } from "@/components/tabs/smartauto24-tab"
+import { ProfitPlusTabV2 } from "@/components/tabs/profit-plus-tab-v2"
+import { ProfitPlusRebuild } from "@/components/tabs/profit-plus-rebuild"
 import { AdvancedSignalsTab } from "@/components/advanced-signals-tab"
 import { useGlobalTradingContext } from "@/hooks/use-global-trading-context"
 import { verifier } from "@/lib/system-verifier"
@@ -218,17 +222,24 @@ export default function DerivAnalysisApp() {
             <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
               <div className="flex flex-nowrap items-center h-16 sm:h-20 gap-4 sm:gap-6 w-full justify-between overflow-hidden">
 
-                {/* Brand Name Only - Clean Modern */}
+                {/* Brand Name - Profithub Logo */}
                 <div className="flex items-center shrink-0 gap-2.5 sm:min-w-[220px]">
-                  <div className={`p-2 rounded-xl flex items-center justify-center shrink-0 ${theme === "dark" ? "bg-indigo-500/10 text-indigo-400 animate-pulse" : "bg-indigo-50 text-indigo-600"}`}>
-                    <Activity className="h-4.5 w-4.5" />
+                  <div className={`p-2 rounded-xl flex items-center justify-center shrink-0 ${theme === "dark" ? "bg-green-500/10" : "bg-green-50"}`}>
+                    <Image
+                      src="/logo-profithub.png"
+                      alt="Profithub"
+                      width={24}
+                      height={24}
+                      style={{ objectFit: "contain" }}
+                      priority
+                    />
                   </div>
                   <div className="flex flex-col leading-none">
-                    <h1 className={`text-base sm:text-lg font-black tracking-tight uppercase bg-gradient-to-r from-indigo-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent`}>
-                      analysistoolpro
+                    <h1 className={`text-base sm:text-lg font-black tracking-tight uppercase bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent`}>
+                      Profithub
                     </h1>
-                    <h2 className={`text-[8px] sm:text-[9px] font-black tracking-[0.25em] opacity-60 uppercase ${theme === "dark" ? "text-indigo-300" : "text-indigo-600"}`}>
-                      QUANTUM ENGINE
+                    <h2 className={`text-[8px] sm:text-[9px] font-black tracking-[0.25em] opacity-60 uppercase ${theme === "dark" ? "text-green-300" : "text-green-600"}`}>
+                      AI TRADING
                     </h2>
                   </div>
                 </div>
@@ -259,6 +270,15 @@ export default function DerivAnalysisApp() {
                     >
                       <AlertTriangle className="h-3.5 w-3.5" />
                       Risk
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => window.open('https://deriv-dtrader.vercel.app', '_blank')}
+                      className={`h-8 px-3 text-[10px] rounded-lg font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-0`}
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      DTrader
                     </Button>
                     <LiveChat />
                     <Button
@@ -342,6 +362,7 @@ export default function DerivAnalysisApp() {
                           "smart-adaptive",
                           "smart-analysis",
                           "smartauto24",
+                          "profit-plus",
                           "money-maker",
                           "autobot",
                           "automated",
@@ -362,6 +383,7 @@ export default function DerivAnalysisApp() {
                             "smart-adaptive": "Smart Adaptive",
                             "smart-analysis": "Smart Analysis",
                             "smartauto24": "SmartAuto24",
+                            "profit-plus": "ProfitPlus",
                             "money-maker": "Money Maker",
                             "autobot": "Auto Bot",
                             "automated": "Automated",
@@ -382,6 +404,7 @@ export default function DerivAnalysisApp() {
                             "smart-adaptive": Sliders,
                             "smart-analysis": LineChart,
                             "smartauto24": Sparkles,
+                            "profit-plus": TrendingUp,
                             "money-maker": TrendingUp,
                             "autobot": Cpu,
                             "automated": Terminal,
@@ -743,7 +766,12 @@ export default function DerivAnalysisApp() {
               </TabsContent>
 
               <TabsContent value="advanced-over-under" className="mt-0">
-                {analysis && <MoneyMakerTab theme={theme} recentDigits={recent50Digits} symbol={symbol} />}
+                {analysis && (
+                  <AdvancedOverUnderTab
+                    theme={theme}
+                    recentDigits={recent50Digits}
+                  />
+                )}
               </TabsContent>
 
               <TabsContent value="matches" className="mt-0">
@@ -789,6 +817,10 @@ export default function DerivAnalysisApp() {
                   maxTicks={maxTicks}
                   onMaxTicksChange={changeMaxTicks}
                 />
+              </TabsContent>
+
+              <TabsContent value="profit-plus" className="mt-0">
+                <ProfitPlusRebuild />
               </TabsContent>
 
               <TabsContent value="money-maker" className="mt-0">

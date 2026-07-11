@@ -1,0 +1,324 @@
+.container {
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(10, 20, 40, 0.8), rgba(20, 30, 60, 0.6));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 200, 255, 0.2);
+}
+
+/* Scanner Control */
+.scannerControl {
+  margin-bottom: 24px;
+}
+
+.scanButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #00d4ff, #0099ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.scanButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+}
+
+.scanButton:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.scanButton.scanning {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+}
+
+/* Progress Section */
+.progressSection {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 100, 200, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #0099ff);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+}
+
+.progressText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #00d4ff;
+  margin-bottom: 12px;
+}
+
+.percentage {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.strategy {
+  color: rgba(0, 212, 255, 0.7);
+}
+
+/* Scanning Dots Animation */
+.scanningDots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #00d4ff;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { opacity: 0.3; }
+  40% { opacity: 1; transform: translateY(-8px); }
+}
+
+/* Results Container */
+.resultsContainer {
+  margin-top: 24px;
+}
+
+.resultsTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #00d4ff;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Strategies List */
+.strategiesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.strategyCard {
+  position: relative;
+  padding: 16px;
+  background: rgba(0, 20, 50, 0.6);
+  border: 2px solid rgba(0, 200, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.strategyCard:hover {
+  border-color: rgba(0, 200, 255, 0.5);
+  background: rgba(0, 30, 70, 0.8);
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.2);
+}
+
+.strategyCard.selected {
+  border-color: #00d4ff;
+  background: rgba(0, 50, 100, 0.6);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+/* Rank Badge */
+.rankBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ff6b00, #ffaa00);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  font-size: 14px;
+}
+
+/* Strategy Header */
+.strategyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.strategyName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00d4ff;
+  margin: 0;
+}
+
+.selectedIcon {
+  color: #00ff00;
+}
+
+/* Signal Details */
+.signalDetails {
+  margin-bottom: 12px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(0, 200, 255, 0.1);
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.value {
+  color: #00d4ff;
+  font-weight: 500;
+}
+
+/* Power Bar */
+.powerBar {
+  position: relative;
+  width: 120px;
+  height: 20px;
+  background: rgba(0, 100, 200, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.powerFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #0099ff);
+  transition: width 0.3s ease;
+}
+
+.powerText {
+  position: absolute;
+  right: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+}
+
+.confidenceValue {
+  color: #00ff00;
+  font-weight: 500;
+}
+
+.scoreValue {
+  color: #ffaa00;
+  font-weight: 600;
+}
+
+/* Reasoning */
+.reasoning {
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(0, 50, 100, 0.4);
+  border-radius: 4px;
+  color: rgba(0, 212, 255, 0.8);
+  font-style: italic;
+}
+
+/* Select Button */
+.selectButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  background: rgba(0, 200, 255, 0.2);
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  color: #00d4ff;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.selectButton:hover {
+  background: rgba(0, 200, 255, 0.3);
+  border-color: rgba(0, 200, 255, 0.6);
+}
+
+/* Recommendation Box */
+.recommendationBox {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(0, 200, 100, 0.1), rgba(0, 150, 200, 0.1));
+  border: 1px solid rgba(0, 200, 100, 0.3);
+  border-radius: 8px;
+  color: #00d4ff;
+}
+
+.recommendationBox h4 {
+  margin: 0 0 8px 0;
+  color: #00ff00;
+  font-size: 14px;
+}
+
+.recommendationBox p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .strategiesList {
+    grid-template-columns: 1fr;
+  }
+
+  .scannerControl {
+    margin-bottom: 16px;
+  }
+
+  .scanButton {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,335 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  background: linear-gradient(135deg, rgba(10, 20, 40, 0.95), rgba(20, 30, 60, 0.9));
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 12px;
+  z-index: 1000;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.titleSection {
+  flex: 1;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #00d4ff;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: rgba(0, 212, 255, 0.7);
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #ff4444;
+}
+
+/* Trade Details */
+.tradeDetails {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00d4ff;
+}
+
+/* Current Trade Box */
+.currentTradeBox {
+  margin: 20px;
+  padding: 12px;
+  background: rgba(0, 100, 200, 0.15);
+  border: 1px solid rgba(0, 150, 255, 0.3);
+  border-radius: 8px;
+  color: #00d4ff;
+}
+
+.currentTradeBox h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.currentTradeBox p {
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+/* Loop Status */
+.loopStatus {
+  padding: 20px;
+  background: rgba(0, 20, 50, 0.4);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.progressContainer {
+  margin-bottom: 16px;
+}
+
+.tradeCounter {
+  font-size: 13px;
+  color: rgba(0, 212, 255, 0.8);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 100, 200, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #0099ff);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background: rgba(0, 50, 100, 0.3);
+  border-radius: 6px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: #00d4ff;
+  margin-top: 4px;
+}
+
+.statValue.positive {
+  color: #00ff00;
+}
+
+.statValue.negative {
+  color: #ff4444;
+}
+
+.statValue.statusValue {
+  font-size: 12px;
+  color: #ffaa00;
+}
+
+.statusMessage {
+  font-size: 13px;
+  color: rgba(0, 212, 255, 0.8);
+  text-align: center;
+  padding: 8px;
+  background: rgba(0, 150, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.startButton {
+  background: linear-gradient(135deg, #00d4ff, #0099ff);
+  color: white;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
+}
+
+.pauseButton {
+  background: linear-gradient(135deg, #ffaa00, #ff8800);
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+}
+
+.pauseButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(255, 170, 0, 0.5);
+}
+
+.resumeButton {
+  background: linear-gradient(135deg, #00ff00, #00aa00);
+  color: white;
+}
+
+.resumeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.cancelButton {
+  background: rgba(255, 68, 68, 0.2);
+  color: #ff4444;
+  border: 1px solid #ff4444;
+}
+
+.cancelButton:hover {
+  background: rgba(255, 68, 68, 0.3);
+}
+
+.doneButton {
+  background: linear-gradient(135deg, #00ff00, #00aa00);
+  color: white;
+}
+
+.doneButton:hover {
+  transform: translateY(-2px);
+}
+
+/* Trade History */
+.tradeHistory {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.tradeHistory h4 {
+  margin: 0 0 12px 0;
+  color: #00d4ff;
+  font-size: 14px;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(0, 50, 100, 0.3);
+  border-radius: 4px;
+  font-size: 12px;
+  border-left: 3px solid #00d4ff;
+}
+
+.historyItem.won {
+  border-left-color: #00ff00;
+  background: rgba(0, 100, 50, 0.2);
+}
+
+.historyItem.lost {
+  border-left-color: #ff4444;
+  background: rgba(100, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .detailGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+}
