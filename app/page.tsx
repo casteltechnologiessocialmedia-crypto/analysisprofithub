@@ -285,6 +285,15 @@ export default function DerivAnalysisApp() {
                     >
                       {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
                     </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowAIScanner(true)}
+                      className={`h-8 px-3 text-[10px] rounded-lg font-bold flex items-center gap-1.5 transition-all bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600/30`}
+                    >
+                      <Cpu className="h-3.5 w-3.5" />
+                      AI Scanner
+                    </Button>
                   </div>
 
                   <DerivAuth theme={theme} />
