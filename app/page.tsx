@@ -359,70 +359,31 @@ export default function DerivAnalysisApp() {
                     <div className="overflow-x-auto no-scrollbar flex">
                       <ResponsiveTabs theme={theme} value={activeTab} onValueChange={setActiveTab}>
                         {[
-                          "dashboard",
-                          "smart-adaptive",
                           "smart-analysis",
-                          "smartauto24",
-                          "profit-plus",
-                          "dtrader",
-                          "money-maker",
-                          "autobot",
-                          "automated",
-                          "signals",
-                          "pro-signals",
-                          "super-signals",
-                          "advanced-signals",
                           "even-odd",
                           "over-under",
                           "advanced-over-under",
+                          "signals",
                           "matches",
                           "differs",
-                          "ai-analysis",
-                          "tools-info",
                         ].filter(tab => !siteConfig?.hiddenTabs?.includes(tab)).map((tab) => {
                           const tabLabels: Record<string, string> = {
-                            "dashboard": "Dashboard",
-                            "smart-adaptive": "Smart Adaptive",
                             "smart-analysis": "Smart Analysis",
-                            "smartauto24": "SmartAuto24",
-                            "profit-plus": "ProfitPlus",
-                            "dtrader": "DTrader",
-                            "money-maker": "Money Maker",
-                            "autobot": "Auto Bot",
-                            "automated": "Automated",
                             "signals": "Signals",
-                            "pro-signals": "Pro Signals",
-                            "super-signals": "Super Signals",
-                            "advanced-signals": "Advanced Signals",
                             "even-odd": "Even/Odd",
                             "over-under": "Over/Under",
                             "advanced-over-under": "Advanced Over/Under",
                             "matches": "Matches",
-                            "differs": "Differs",
-                            "ai-analysis": "AI Analysis",
-                            "tools-info": "Tools Info"
+                            "differs": "Differs"
                           }
                           const tabIcons: Record<string, any> = {
-                            "dashboard": LayoutDashboard,
-                            "smart-adaptive": Sliders,
                             "smart-analysis": LineChart,
-                            "smartauto24": Sparkles,
-                            "profit-plus": TrendingUp,
-                            "dtrader": Activity,
-                            "money-maker": TrendingUp,
-                            "autobot": Cpu,
-                            "automated": Terminal,
                             "signals": Radio,
-                            "pro-signals": TrendingUp,
-                            "super-signals": Flame,
-                            "advanced-signals": Activity,
                             "even-odd": Hash,
                             "over-under": ArrowUpDown,
                             "advanced-over-under": Percent,
                             "matches": CheckSquare,
-                            "differs": XCircle,
-                            "ai-analysis": BrainCircuit,
-                            "tools-info": HelpCircle
+                            "differs": XCircle
                           }
                           const IconComponent = tabIcons[tab]
                           return (
@@ -587,10 +548,6 @@ export default function DerivAnalysisApp() {
                   Reconnecting to Deriv API... Some data may be delayed.
                 </div>
               )}
-              <TabsContent value="dashboard" className="mt-0">
-                <DashboardTab theme={theme} />
-              </TabsContent>
-
               <TabsContent value="smart-analysis" className="mt-0 space-y-2 sm:space-y-3 md:space-y-4">
                 <div
                   className={`rounded-lg sm:rounded-xl p-2 sm:p-3 border flex items-center justify-between ${theme === "dark" ? "bg-linear-to-br from-[#0f1629]/80 to-[#1a2235]/80 border-blue-500/20 shadow-[0_0_30px_rgba(59,130,246,0.2)]" : "bg-white border-gray-200 shadow-lg"}`}
@@ -713,28 +670,6 @@ export default function DerivAnalysisApp() {
                 {analysis && <SignalsTab signals={signals} proSignals={proSignals} analysis={analysis} theme={theme} symbol={symbol} currentPrice={currentPrice} currentDigit={currentDigit} tickCount={tickCount} maxTicks={maxTicks} onMaxTicksChange={changeMaxTicks} />}
               </TabsContent>
 
-              <TabsContent value="pro-signals" className="mt-0">
-                {analysis && <ProSignalsTab proSignals={proSignals} analysis={analysis} theme={theme} symbol={symbol} currentPrice={currentPrice} currentDigit={currentDigit} tickCount={tickCount} maxTicks={maxTicks} onMaxTicksChange={changeMaxTicks} />}
-              </TabsContent>
-
-              <TabsContent value="super-signals" className="mt-0">
-                {analysis && (
-                  <HeritageSuperSignals 
-                    theme={theme} 
-                    symbol={symbol} 
-                    availableSymbols={availableSymbols} 
-                    maxTicks={maxTicks}
-                    analysis={analysis}
-                    recentDigits={recentDigits}
-                    tickCount={tickCount}
-                  />
-                )}
-              </TabsContent>
-
-              <TabsContent value="advanced-signals" className="mt-0">
-                <AdvancedSignalsTab theme={theme} availableSymbols={availableSymbols} />
-              </TabsContent>
-
               <TabsContent value="even-odd" className="mt-0">
                 {analysis && (
                   <EvenOddTab
@@ -790,69 +725,7 @@ export default function DerivAnalysisApp() {
                 )}
               </TabsContent>
 
-              <TabsContent value="ai-analysis" className="mt-0">
-                {analysis && (
-                  <AIAnalysisTab
-                    analysis={analysis}
-                    currentDigit={currentDigit}
-                    currentPrice={currentPrice}
-                    symbol={symbol}
-                    theme={theme}
-                    availableSymbols={availableSymbols}
-                    onSymbolChange={changeSymbol}
-                  />
-                )}
-              </TabsContent>
-
-              <TabsContent value="autobot" className="mt-0">
-                <AutoBotTab theme={theme} symbol={symbol} />
-              </TabsContent>
-
-              <TabsContent value="automated" className="mt-0">
-                <AutomatedTab theme={theme} symbol={symbol} />
-              </TabsContent>
-
-              <TabsContent value="smartauto24" className="mt-0">
-                <SmartAuto24Tab
-                  theme={theme}
-                  symbol={symbol}
-                  onSymbolChange={changeSymbol}
-                  availableSymbols={availableSymbols}
-                  maxTicks={maxTicks}
-                  onMaxTicksChange={changeMaxTicks}
-                />
-              </TabsContent>
-
-              <TabsContent value="profit-plus" className="mt-0">
-                <ProfitPlusRebuild />
-              </TabsContent>
-
-              <TabsContent value="dtrader" className="mt-0">
-                <DTraderTab theme={theme} />
-              </TabsContent>
-
-              <TabsContent value="money-maker" className="mt-0">
-                <MoneyMakerTab
-                  theme={theme}
-                  symbol={symbol}
-                  onSymbolChange={changeSymbol}
-                  availableSymbols={availableSymbols}
-                  recentDigits={recent100Digits}
-                />
-              </TabsContent>
-
-              <TabsContent value="smart-adaptive" className="mt-0">
-                {analysis && <SmartAdaptiveTradingTab signals={signals} analysis={analysis} symbol={symbol} theme={theme} currentPrice={currentPrice} currentDigit={currentDigit} tickCount={tickCount} />}
-              </TabsContent>
-
-              <TabsContent value="tools-info" className="mt-0">
-                <ToolsInfoTab theme={theme} connectionLogs={connectionLogs} />
-              </TabsContent>
-            </>
-          )}
-        </main>
-      </Tabs>
-
+              
       {!siteConfig?.footerHidden && (
         <footer
           className={`mt-4 py-3 transition-all duration-300 border-t ${theme === "dark"
